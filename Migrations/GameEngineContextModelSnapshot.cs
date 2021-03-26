@@ -53,13 +53,7 @@ namespace RoBHo_GameEngine.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CharacterId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CharacterId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CharacterId2")
+                    b.Property<int?>("CharacterId")
                         .HasColumnType("int");
 
                     b.Property<int>("CurrentXp")
@@ -73,16 +67,7 @@ namespace RoBHo_GameEngine.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId")
-                        .IsUnique();
-
-                    b.HasIndex("CharacterId1")
-                        .IsUnique()
-                        .HasFilter("[CharacterId1] IS NOT NULL");
-
-                    b.HasIndex("CharacterId2")
-                        .IsUnique()
-                        .HasFilter("[CharacterId2] IS NOT NULL");
+                    b.HasIndex("CharacterId");
 
                     b.ToTable("CharacterLvls");
                 });
@@ -90,29 +75,10 @@ namespace RoBHo_GameEngine.Migrations
             modelBuilder.Entity("RoBHo_GameEngine.Models.CharacterLvl", b =>
                 {
                     b.HasOne("RoBHo_GameEngine.Models.Character", "Character")
-                        .WithOne("Combatlvl")
-                        .HasForeignKey("RoBHo_GameEngine.Models.CharacterLvl", "CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RoBHo_GameEngine.Models.Character", null)
-                        .WithOne("CraftingLvl")
-                        .HasForeignKey("RoBHo_GameEngine.Models.CharacterLvl", "CharacterId1");
-
-                    b.HasOne("RoBHo_GameEngine.Models.Character", null)
-                        .WithOne("GatheringLvl")
-                        .HasForeignKey("RoBHo_GameEngine.Models.CharacterLvl", "CharacterId2");
+                        .WithMany()
+                        .HasForeignKey("CharacterId");
 
                     b.Navigation("Character");
-                });
-
-            modelBuilder.Entity("RoBHo_GameEngine.Models.Character", b =>
-                {
-                    b.Navigation("Combatlvl");
-
-                    b.Navigation("CraftingLvl");
-
-                    b.Navigation("GatheringLvl");
                 });
 #pragma warning restore 612, 618
         }

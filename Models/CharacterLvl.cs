@@ -12,6 +12,6 @@ namespace RoBHo_GameEngine.Models
         public LvlType LvlType { get; set; } 
 
         public Character Character { get; set; }
-        public int CharacterId { get; set; }
+     
     }
 }

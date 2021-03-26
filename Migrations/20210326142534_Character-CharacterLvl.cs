@@ -32,9 +32,7 @@ namespace RoBHo_GameEngine.Migrations
                     Lvl = table.Column<int>(type: "int", nullable: false),
                     CurrentXp = table.Column<int>(type: "int", nullable: false),
                     LvlType = table.Column<int>(type: "int", nullable: false),
-                    CharacterId = table.Column<int>(type: "int", nullable: false),
-                    CharacterId1 = table.Column<int>(type: "int", nullable: true),
-                    CharacterId2 = table.Column<int>(type: "int", nullable: true)
+                    CharacterId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,40 +42,13 @@ namespace RoBHo_GameEngine.Migrations
                         column: x => x.CharacterId,
                         principalTable: "Character",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CharacterLvls_Character_CharacterId1",
-                        column: x => x.CharacterId1,
-                        principalTable: "Character",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CharacterLvls_Character_CharacterId2",
-                        column: x => x.CharacterId2,
-                        principalTable: "Character",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CharacterLvls_CharacterId",
                 table: "CharacterLvls",
-                column: "CharacterId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CharacterLvls_CharacterId1",
-                table: "CharacterLvls",
-                column: "CharacterId1",
-                unique: true,
-                filter: "[CharacterId1] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CharacterLvls_CharacterId2",
-                table: "CharacterLvls",
-                column: "CharacterId2",
-                unique: true,
-                filter: "[CharacterId2] IS NOT NULL");
+                column: "CharacterId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

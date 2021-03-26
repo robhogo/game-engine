@@ -15,9 +15,6 @@ namespace RoBHo_GameEngine.Models
         public int Money { get; set; }
         public string ImgUrl { get; set; }
 
-        public CharacterLvl Combatlvl { get; set; }
-        public CharacterLvl CraftingLvl { get; set; }
-        public CharacterLvl GatheringLvl { get; set; }
         public int UserId { get; set; }
     }
 }

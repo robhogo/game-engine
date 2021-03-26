@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RoBHo_GameEngine.Contexts;
-
+using RoBHo_GameEngine.Services;
 
 namespace RoBHo_GameEngine
 {
@@ -25,8 +25,11 @@ namespace RoBHo_GameEngine
             services.AddDbContext<GameEngineContext>(
                 options => options.UseSqlServer(connection));
 
+            services.AddCors();
             services.AddControllers();
-   
+
+            services.AddScoped<ICharacterLogic, CharacterLogic>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +58,8 @@ namespace RoBHo_GameEngine
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+
+            app.UseEndpoints(x => x.MapControllers());
 
         }
     }

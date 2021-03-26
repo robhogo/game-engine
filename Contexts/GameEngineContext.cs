@@ -32,10 +32,6 @@ namespace RoBHo_GameEngine.Contexts
                 .Property(c => c.CharacterClass)
                 .HasConversion<int>();
 
-            modelBuilder.Entity<Character>()
-                .HasOne(c => c.Combatlvl)
-                .WithOne(cl => cl.Character)
-                .HasForeignKey<CharacterLvl>(cl => cl.CharacterId);
         }
     }
 }
