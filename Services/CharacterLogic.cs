@@ -1,5 +1,7 @@
 ﻿using RoBHo_GameEngine.Contexts;
 using RoBHo_GameEngine.Models;
+using RoBHo_GameEngine.Repositories;
+using RoBHo_GameEngine.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +11,30 @@ namespace RoBHo_GameEngine.Services
 {
     public class CharacterLogic : ICharacterLogic
     {
-        private readonly GameEngineContext _context;
+        private readonly ICharacterRepository _repository;
 
-        public CharacterLogic(GameEngineContext context)
+        public CharacterLogic(ICharacterRepository repository)
         {
-            _context = context;
+            _repository = repository;
+        }
+
+        public bool Create(CharacterCreateRequest request)
+        {
+            Character character = new Character()
+            {
+                Name = request.Name,
+                ImgUrl = request.imageUrl,
+                CharacterClass = (CharacterClass)request.CharacterClass,
+                Money = 0,
+                UserId = request.UserId
+            };
+            return _repository.Create(character);
         }
 
         public List<Character> GetAll()
         {
-            return _context.Characters.ToList();
+            return _repository.GetAll();
         }
+
     }
 }

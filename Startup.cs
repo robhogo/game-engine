@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RoBHo_GameEngine.Contexts;
+using RoBHo_GameEngine.Repositories;
 using RoBHo_GameEngine.Services;
 
 namespace RoBHo_GameEngine
@@ -29,6 +30,7 @@ namespace RoBHo_GameEngine
             services.AddControllers();
 
             services.AddScoped<ICharacterLogic, CharacterLogic>();
+            services.AddScoped<ICharacterRepository, CharacterRepository>();
 
         }
 

@@ -1,15 +1,14 @@
 ﻿using RoBHo_GameEngine.Models;
-using RoBHo_GameEngine.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RoBHo_GameEngine.Services
+namespace RoBHo_GameEngine.Repositories
 {
-    public interface ICharacterLogic
+    public interface ICharacterRepository
     {
         List<Character> GetAll();
-        bool Create(CharacterCreateRequest request);
+        bool Create(Character character);
     }
 }
