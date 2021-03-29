@@ -36,5 +36,9 @@ namespace RoBHo_GameEngine.Services
             return _repository.GetAll();
         }
 
+        public List<Character> GetAllByUser(int userId)
+        {
+            return _repository.GetAllByUser(userId);
+        }
     }
 }

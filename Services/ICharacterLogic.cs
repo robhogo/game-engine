@@ -11,5 +11,6 @@ namespace RoBHo_GameEngine.Services
     {
         List<Character> GetAll();
         bool Create(CharacterCreateRequest request);
+        List<Character> GetAllByUser(int userId);
     }
 }

@@ -10,5 +10,6 @@ namespace RoBHo_GameEngine.Repositories
     {
         List<Character> GetAll();
         bool Create(Character character);
+        List<Character> GetAllByUser(int userId);
     }
 }

@@ -34,5 +34,10 @@ namespace RoBHo_GameEngine.Repositories
         {
             return _context.Characters.ToList();
         }
+
+        public List<Character> GetAllByUser(int userId)
+        {
+            return _context.Characters.Where(c => c.UserId == userId).ToList();
+        }
     }
 }

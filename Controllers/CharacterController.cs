@@ -37,6 +37,24 @@ namespace RoBHo_GameEngine.Controllers
             }
         }
 
+        [HttpGet("all/{userId}")]
+        public IActionResult GetAllByUser(int userId)
+        {
+            try
+            {
+                var response = _characterLogic.GetAllByUser(userId);
+
+                if (response == null || response.Count == 0)
+                    return BadRequest(new { message = "no characters found" });
+
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.ToString() });
+            }
+        }
+
         [HttpPost("create")]
         public IActionResult Create(CharacterCreateRequest request)
         {
