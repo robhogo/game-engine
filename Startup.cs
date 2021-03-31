@@ -5,7 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RoBHo_GameEngine.Contexts;
+using RoBHo_GameEngine.Contexts.Converters;
+using RoBHo_GameEngine.Contexts.DataModels;
+using RoBHo_GameEngine.Models;
 using RoBHo_GameEngine.Repositories;
+using RoBHo_GameEngine.Requests;
 using RoBHo_GameEngine.Services;
 
 namespace RoBHo_GameEngine
@@ -31,6 +35,8 @@ namespace RoBHo_GameEngine
 
             services.AddScoped<ICharacterLogic, CharacterLogic>();
             services.AddScoped<ICharacterRepository, CharacterRepository>();
+            services.AddScoped<IDataModelConverter<CharacterDataModel, Character, CharacterCreateRequest>, CharacterConverter>();
+            services.AddScoped<IDataModelConverter<CharacterLvlDataModel, CharacterLvl, LvlType>, CharacterLvlConverter>();
 
         }
 

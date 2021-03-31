@@ -1,4 +1,5 @@
-﻿using RoBHo_GameEngine.Models;
+﻿using RoBHo_GameEngine.Contexts;
+using RoBHo_GameEngine.Contexts.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace RoBHo_GameEngine.Repositories
 {
     public interface ICharacterRepository
     {
-        List<Character> GetAll();
-        bool Create(Character character);
-        List<Character> GetAllByUser(int userId);
+        List<CharacterDataModel> GetAll();
+        bool Create(CharacterDataModel character);
+        List<CharacterDataModel> GetAllByUser(int userId);
     }
 }

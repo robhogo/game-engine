@@ -1,4 +1,6 @@
-﻿using RoBHo_GameEngine.Models;
+﻿using RoBHo_GameEngine.Contexts;
+using RoBHo_GameEngine.Contexts.DataModels;
+using RoBHo_GameEngine.Models;
 using RoBHo_GameEngine.Requests;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,6 @@ namespace RoBHo_GameEngine.Services
     {
         List<Character> GetAll();
         bool Create(CharacterCreateRequest request);
-        List<GetCharacterResponse> GetAllByUser(int userId);
+        List<Character> GetAllByUser(int userId);
     }
 }

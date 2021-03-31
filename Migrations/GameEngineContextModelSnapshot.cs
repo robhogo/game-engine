@@ -19,7 +19,7 @@ namespace RoBHo_GameEngine.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RoBHo_GameEngine.Models.Character", b =>
+            modelBuilder.Entity("RoBHo_GameEngine.Contexts.DataModels.CharacterDataModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace RoBHo_GameEngine.Migrations
                     b.ToTable("Character");
                 });
 
-            modelBuilder.Entity("RoBHo_GameEngine.Models.CharacterLvl", b =>
+            modelBuilder.Entity("RoBHo_GameEngine.Contexts.DataModels.CharacterLvlDataModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,16 +72,16 @@ namespace RoBHo_GameEngine.Migrations
                     b.ToTable("CharacterLvls");
                 });
 
-            modelBuilder.Entity("RoBHo_GameEngine.Models.CharacterLvl", b =>
+            modelBuilder.Entity("RoBHo_GameEngine.Contexts.DataModels.CharacterLvlDataModel", b =>
                 {
-                    b.HasOne("RoBHo_GameEngine.Models.Character", "Character")
+                    b.HasOne("RoBHo_GameEngine.Contexts.DataModels.CharacterDataModel", "Character")
                         .WithMany("CharacterLvls")
                         .HasForeignKey("CharacterId");
 
                     b.Navigation("Character");
                 });
 
-            modelBuilder.Entity("RoBHo_GameEngine.Models.Character", b =>
+            modelBuilder.Entity("RoBHo_GameEngine.Contexts.DataModels.CharacterDataModel", b =>
                 {
                     b.Navigation("CharacterLvls");
                 });

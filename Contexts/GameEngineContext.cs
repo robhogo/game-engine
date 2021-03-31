@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RoBHo_GameEngine.Models;
+using RoBHo_GameEngine.Contexts.DataModels;
 
 namespace RoBHo_GameEngine.Contexts
 {
@@ -9,15 +9,15 @@ namespace RoBHo_GameEngine.Contexts
         {
         }
 
-        public DbSet<Character> Characters { get; set; }
+        public DbSet<CharacterDataModel> Characters { get; set; }
 
-        public DbSet<CharacterLvl> CharacterLvls { get; set; }
+        public DbSet<CharacterLvlDataModel> CharacterLvls { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             onCharacterCreating(modelBuilder);
 
-            modelBuilder.Entity<CharacterLvl>()
+            modelBuilder.Entity<CharacterLvlDataModel>()
                 .ToTable("CharacterLvls")
                 .Property(cl => cl.LvlType)
                .HasConversion<int>();
@@ -27,12 +27,12 @@ namespace RoBHo_GameEngine.Contexts
 
         private void onCharacterCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Character>()
+            modelBuilder.Entity<CharacterDataModel>()
                 .ToTable("Character")
                 .HasMany(c => c.CharacterLvls)
                 .WithOne(cl => cl.Character);
 
-            modelBuilder.Entity<Character>()
+            modelBuilder.Entity<CharacterDataModel>()
                 .Property(c => c.CharacterClass)
                 .HasConversion<int>();
         }

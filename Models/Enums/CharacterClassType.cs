@@ -1,4 +1,4 @@
-﻿public enum CharacterClass
+﻿public enum CharacterClassType
 {
     Fighter = 1,
     Mage = 2,

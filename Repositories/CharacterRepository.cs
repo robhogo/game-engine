@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RoBHo_GameEngine.Contexts;
-using RoBHo_GameEngine.Models;
+using RoBHo_GameEngine.Contexts.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace RoBHo_GameEngine.Repositories
             _context = context;
         }
 
-        public bool Create(Character character)
+        public bool Create(CharacterDataModel character)
         {
             try
             {
@@ -31,12 +31,14 @@ namespace RoBHo_GameEngine.Repositories
             }
         }
 
-        public List<Character> GetAll()
+        public List<CharacterDataModel> GetAll()
         {
-            return _context.Characters.ToList();
+            return _context.Characters
+                .Include(c => c.CharacterLvls)
+                .ToList();
         }
 
-        public List<Character> GetAllByUser(int userId)
+        public List<CharacterDataModel> GetAllByUser(int userId)
         {
            return _context.Characters
                 .Include(c => c.CharacterLvls).
