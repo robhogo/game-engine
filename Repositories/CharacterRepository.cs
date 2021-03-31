@@ -1,4 +1,5 @@
-﻿using RoBHo_GameEngine.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using RoBHo_GameEngine.Contexts;
 using RoBHo_GameEngine.Models;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,9 @@ namespace RoBHo_GameEngine.Repositories
 
         public List<Character> GetAllByUser(int userId)
         {
-            return _context.Characters.Where(c => c.UserId == userId).ToList();
+           return _context.Characters
+                .Include(c => c.CharacterLvls).
+                Where(c => c.UserId == userId).ToList();
         }
     }
 }

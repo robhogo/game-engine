@@ -20,14 +20,18 @@ namespace RoBHo_GameEngine.Services
 
         public bool Create(CharacterCreateRequest request)
         {
+            List<CharacterLvl> characterLvls = new List<CharacterLvl> { new CharacterLvl(LvlType.combat), new CharacterLvl(LvlType.crafting), new CharacterLvl(LvlType.gathering)};
+
             Character character = new Character()
             {
                 Name = request.Name,
                 ImgUrl = request.imageUrl,
                 CharacterClass = (CharacterClass)request.CharacterClass,
                 Money = 0,
-                UserId = request.UserId
+                UserId = request.UserId,
+                CharacterLvls = characterLvls
             };
+            
             return _repository.Create(character);
         }
 
@@ -36,9 +40,12 @@ namespace RoBHo_GameEngine.Services
             return _repository.GetAll();
         }
 
-        public List<Character> GetAllByUser(int userId)
+        public List<GetCharacterResponse> GetAllByUser(int userId)
         {
-            return _repository.GetAllByUser(userId);
+            List<GetCharacterResponse> response = new List<GetCharacterResponse>();
+            List<Character> characters = _repository.GetAllByUser(userId);
+            characters.ForEach(c => response.Add(new GetCharacterResponse(c)));
+            return response;
         }
     }
 }

@@ -29,9 +29,12 @@ namespace RoBHo_GameEngine.Contexts
         {
             modelBuilder.Entity<Character>()
                 .ToTable("Character")
+                .HasMany(c => c.CharacterLvls)
+                .WithOne(cl => cl.Character);
+
+            modelBuilder.Entity<Character>()
                 .Property(c => c.CharacterClass)
                 .HasConversion<int>();
-
         }
     }
 }

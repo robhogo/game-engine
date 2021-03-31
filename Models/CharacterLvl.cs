@@ -13,5 +13,11 @@ namespace RoBHo_GameEngine.Models
 
         public Character Character { get; set; }
      
+        public CharacterLvl(LvlType lvlType)
+        {
+            Lvl = 1;
+            CurrentXp = 0;
+            LvlType = lvlType;
+        }
     }
 }

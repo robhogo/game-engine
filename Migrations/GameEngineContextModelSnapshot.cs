@@ -75,10 +75,15 @@ namespace RoBHo_GameEngine.Migrations
             modelBuilder.Entity("RoBHo_GameEngine.Models.CharacterLvl", b =>
                 {
                     b.HasOne("RoBHo_GameEngine.Models.Character", "Character")
-                        .WithMany()
+                        .WithMany("CharacterLvls")
                         .HasForeignKey("CharacterId");
 
                     b.Navigation("Character");
+                });
+
+            modelBuilder.Entity("RoBHo_GameEngine.Models.Character", b =>
+                {
+                    b.Navigation("CharacterLvls");
                 });
 #pragma warning restore 612, 618
         }
