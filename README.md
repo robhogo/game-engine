@@ -1,5 +1,6 @@
 [![Build](https://github.com/kwetterr/ui/actions/workflows/build.yml/badge.svg)](https://github.com/robhogo/game-engine/actions/workflows/build.yml)
 [![Publish Docker image](https://github.com/kwetterr/ui/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/robhogo/game-engine/actions/workflows/docker-publish.yml)
+[![CodeQL](https://github.com/kwetterr/user-service/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/kwetterr/game-engine/actions/workflows/codeql-analysis.yml)
 
 # 🎮 game-engine 
 game-engine for robhogo. Made with:
