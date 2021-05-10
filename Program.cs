@@ -21,7 +21,7 @@ namespace RoBHo_GameEngine
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://*:5010");
+                    .UseUrls("http://*:5002");
                 });
     }
 }
