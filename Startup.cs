@@ -17,6 +17,8 @@ namespace RoBHo_GameEngine
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,7 +35,18 @@ namespace RoBHo_GameEngine
 
             services.AddSwaggerGen();
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("*")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowAnyOrigin();
+                      });
+            });
+
             services.AddControllers();
 
             services.AddScoped<ICharacterLogic, CharacterLogic>();
@@ -53,6 +66,9 @@ namespace RoBHo_GameEngine
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
+
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -63,12 +79,6 @@ namespace RoBHo_GameEngine
             {
                 endpoints.MapControllers();
             });
-
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
 
             app.UseEndpoints(x => x.MapControllers());
 
