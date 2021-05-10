@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using RoBHo_GameEngine.Contexts;
 using RoBHo_GameEngine.Contexts.Converters;
 using RoBHo_GameEngine.Contexts.DataModels;
@@ -29,6 +30,8 @@ namespace RoBHo_GameEngine
             var connection = Configuration.GetConnectionString("GameEngineContext");
             services.AddDbContext<GameEngineContext>(
                 options => options.UseSqlServer(connection));
+
+            services.AddSwaggerGen();
 
             services.AddCors();
             services.AddControllers();
@@ -68,6 +71,20 @@ namespace RoBHo_GameEngine
                 .AllowAnyHeader());
 
             app.UseEndpoints(x => x.MapControllers());
+
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "game-engine");
+                // Serve the swagger UI at the app's root
+                c.RoutePrefix = string.Empty;
+            });
 
         }
     }

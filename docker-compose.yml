@@ -3,19 +3,19 @@ services:
     pkg:
         build: .
         ports:
-            - "5010:5010"
+            - "5002:5002"
         depends_on:
-            - db
-    db:
+            - game_db
+    game_db:
         image: "mcr.microsoft.com/mssql/server"
         volumes:
-          - sqlvolume:/var/opt/mssql
+          - game_volume:/var/opt/mssql
 
         environment:
             SA_PASSWORD: "Your_password123"
             ACCEPT_EULA: "Y"
         ports:
-            - "1434:1433"
-
+            - "1433"
+            - "1002:1433"
 volumes:
-  sqlvolume:
+  game_volume:

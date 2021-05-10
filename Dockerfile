@@ -1,10 +1,13 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+ENV ASPNETCORE_ENVIRONMENT="Development"
+ENV ENVIRONMENT="Development"
 
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
-EXPOSE 5010
+EXPOSE 5002
 
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+
 WORKDIR /src
 COPY ["RoBHo-GameEngine.csproj", "."]
 RUN dotnet restore "./RoBHo-GameEngine.csproj"
