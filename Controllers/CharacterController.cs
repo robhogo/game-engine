@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Confluent.Kafka;
+using Microsoft.AspNetCore.Mvc;
 using RoBHo_GameEngine.Requests;
 using RoBHo_GameEngine.Services;
 using System;
@@ -13,6 +14,9 @@ namespace RoBHo_GameEngine.Controllers
     public class CharacterController : ControllerBase
     {
         private readonly ICharacterLogic _characterLogic;
+        private readonly ProducerConfig config = new ProducerConfig
+        { BootstrapServers = "localhost:9092" };
+        private readonly string topic = "simpletalk_topic";
 
         public CharacterController(ICharacterLogic characterLogic)
         {
@@ -43,6 +47,7 @@ namespace RoBHo_GameEngine.Controllers
             try
             {
                 var response = _characterLogic.GetAllByUser(userId);
+                SendToKafka(topic, "user got characters");
 
                 if (response == null || response.Count == 0)
                     return BadRequest(new { message = "no characters found" });
@@ -71,6 +76,25 @@ namespace RoBHo_GameEngine.Controllers
             {
                 return BadRequest(new { message = e.ToString() });
             }
+        }
+
+        private Object SendToKafka(string topic, string message)
+        {
+            using (var producer =
+                 new ProducerBuilder<Null, string>(config).Build())
+            {
+                try
+                {
+                    return producer.ProduceAsync(topic, new Message<Null, string> { Value = message })
+                        .GetAwaiter()
+                        .GetResult();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Oops, something went wrong: {e}");
+                }
+            }
+            return null;
         }
     }
 }
