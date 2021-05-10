@@ -29,7 +29,7 @@ namespace RoBHo_GameEngine
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration.GetConnectionString("GameEngineContext");
+            var connection = Configuration.GetValue<string>("ConnectionString");
             services.AddDbContext<GameEngineContext>(
                 options => options.UseSqlServer(connection));
 

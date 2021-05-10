@@ -1,7 +1,10 @@
 ﻿version: "3.7"
 services:
     pkg:
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile.local
+        container_name: game-engine
         ports:
             - "5002:5002"
         depends_on:
